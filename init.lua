@@ -557,7 +557,10 @@ mt.register_craft({
 	burntime = 10
 })
 
-if rawget(_G, "sfinv_buttons") then
+-- Inventory button is hidden by default
+local show_inv_button = core.settings:get_bool('creative_mode') or core.settings:get_bool('craftguide.show_inv_button') == true
+
+if show_inv_button and rawget(_G, "sfinv_buttons") then
 	sfinv_buttons.register_button("craftguide", {
 		title = S("Crafting Guide"),
 		tooltip = S("Shows a list of available crafting recipes, cooking recipes and fuels"),
