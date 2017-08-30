@@ -2444,6 +2444,20 @@ if progressive_mode then
 	end)
 end
 
+-- Inventory button is hidden by default
+local show_inv_button = core.settings:get_bool('creative_mode') or core.settings:get_bool('craftguide.show_inv_button') == true
+
+if show_inv_button and rawget(_G, "sfinv_buttons") then
+	sfinv_buttons.register_button("craftguide", {
+		title = S("Crafting Guide"),
+		tooltip = S("Shows a list of available crafting recipes, cooking recipes and fuels"),
+		action = function(player)
+			craftguide:on_use(nil, player)
+		end,
+		image = "craftguide_book.png",
+	})
+end
+
 on_leaveplayer(function(player)
 	local name = player:get_player_name()
 	pdata[name] = nil
